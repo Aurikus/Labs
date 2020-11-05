@@ -27,3 +27,13 @@ unsigned Bankomat::getSumMaxGet()
 {
 	return sumMaxGet;
 }
+
+void Bankomat::setM(int m_id1)
+{
+	m_id = m_id1;
+}
+
+int Bankomat::getM()
+{
+	return m_id;
+}

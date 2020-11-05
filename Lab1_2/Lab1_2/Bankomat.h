@@ -8,11 +8,15 @@ public:
 	unsigned getSumBank();
 	void setSumMaxGet(unsigned);
 	unsigned getSumMaxGet();
+	void setM(int);
+	int getM();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);
 	char* to_String();
 	Bankomat();
+	Bankomat(const Bankomat& Bankomat);
 	Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1);
+	~Bankomat();
 	friend Bankomat operator-(Bankomat, unsigned);
 	friend Bankomat operator+(Bankomat, unsigned);
 	friend bool operator>=(Bankomat, unsigned);
@@ -23,7 +27,6 @@ private:
 	char* id = new char[100];
 	unsigned sumBank;
 	unsigned sumMaxGet;
+	static int s_idGenerator;
+	int m_id;
 };
-
-
-

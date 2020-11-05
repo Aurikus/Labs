@@ -1,8 +1,6 @@
-﻿// разбить все сложные задачи на мелкие, более простые 
-#include <iostream>
+﻿#include <iostream>
 #include <algorithm>
 #include "Bankomat.h"
-#include "Bankomat.cpp"
 
 using namespace std;
 
@@ -33,15 +31,15 @@ int main()
 	func.loadMoney(g);
 	cout << "Input sum of take " << endl;
 	unsigned f;
-		cin >> f;
-		if ((f < sumGet) && (f < sum))
-		{
-			func.takeMoney(f);
-		}
-		else
-		{
-			cout << " You can't get that amount of money" << endl;
-		}
+	cin >> f;
+	if ((f < sumGet) && (f < sum))
+	{
+		func.takeMoney(f);
+	}
+	else
+	{
+		cout << " You can't get that amount of money" << endl;
+	}
 	Bankomat Sub(n, sum, sumGet);
 
 	// ЗОНА ТЕСТИРОВАНИЯ ОПЕРАТОРОВ ПЕРЕГРУЗКИ 
@@ -60,5 +58,3 @@ int main()
 	}
 	return 0;
 }
-
-
