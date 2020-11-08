@@ -29,7 +29,7 @@ int main()
 	cout << "Input sum of load " << endl;
 	cin >> g;
 	func.loadMoney(g);
-	cout << "Input sum of take " << endl;
+	/* cout << "Input sum of take " << endl;
 	unsigned f;
 	cin >> f;
 	if ((f < sumGet) && (f < sum))
@@ -43,7 +43,7 @@ int main()
 	Bankomat Sub(n, sum, sumGet);
 
 	// ЗОНА ТЕСТИРОВАНИЯ ОПЕРАТОРОВ ПЕРЕГРУЗКИ 
-
+	
 	Sub = Sub + 15000;	// passed and worked  
 	Sub = Sub - 1111;	// passed and worked 
 	Bankomat GigiZaShagi = Sub; // passed and worked 
@@ -55,6 +55,6 @@ int main()
 	else
 	{
 		cout << " Sum ne Super :( " << endl;
-	}
+	}*/
 	return 0;
 }

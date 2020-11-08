@@ -14,6 +14,7 @@ Bankomat::Bankomat()
 	id = new char[100];
 	sumBank = 100000;
 	sumMaxGet = 5000;
+	cout << __FUNCTION__ << endl;
 };
 Bankomat::Bankomat(const Bankomat& Bankomat) :
 	id(Bankomat.id), sumBank(Bankomat.sumBank),sumMaxGet(Bankomat.sumMaxGet)
@@ -31,18 +32,76 @@ Bankomat::Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1)
 Bankomat::~Bankomat()
 {
 	delete[] id;
-	delete[] &sumBank;
-	delete[] &sumMaxGet;
 }
+
+/* void exception()
+{
+	Bankomat abs;
+	try
+	{
+		
+	}
+	catch (int)
+	{
+		cerr << " We caught an int exception " << endl;
+	}
+	catch (double)
+	{
+		cerr << " We caught a double exception " << endl;
+	}
+	catch(...)
+	{}
+}*/
 
 unsigned Bankomat::loadMoney(unsigned sumLoad) 
 {
+	try // Try catch block works properly
+	{
+		if (sumLoad < 0)
+		{
+			throw sumLoad;
+		}
+		throw sumLoad = 0;
+	}
+	catch (char*)
+	{
+		cerr << " We caught a char exception " << endl;
+	}
+	catch(int) 
+	{
+		cerr << " We caught an int exception " << endl;
+	}
+	catch (...)
+	{
+		cerr << " We caught unknown exception " << endl;
+	}
 	sumBank += sumLoad;
 	return sumBank;
 }
 
 unsigned Bankomat::takeMoney(unsigned sumTake)
 {
+	try // Try catch block works properly
+	{
+		if (sumTake < 0)
+		{
+			throw sumTake;
+		}
+		throw sumTake = 0;
+	}
+	catch (char*)
+	{
+		cerr << " We caught a char exception " << endl;
+	}
+	catch (int)
+	{
+		cerr << " We caught an int exception " << endl;
+	}
+	catch (...)
+	{
+		cerr << " We caught unknown exception " << endl;
+	}
+
 	if ((sumBank >= sumTake) && (sumTake <= sumMaxGet))
 	{
 		sumBank -= sumTake;
@@ -62,12 +121,56 @@ char* Bankomat::to_String()
 
 Bankomat operator-(Bankomat Sub, unsigned subtract) // try catch
 {
+	try // Try catch block works properly
+	{
+		if ((subtract > Sub.sumMaxGet) || (subtract > Sub.sumBank))
+		{
+			throw subtract;
+		}
+		if (subtract < 0)
+		{
+			throw subtract;
+		}
+		throw subtract = 0;
+	}
+	catch (char*)
+	{
+		cerr << " We caught a char exception " << endl;
+	}
+	catch (int)
+	{
+		cerr << " We caught an int exception " << endl;
+	}
+	catch (...)
+	{
+		cerr << " We caught unknown exception " << endl;
+	}
 	Sub.sumBank -= subtract;
 	return Sub;
 }
 
 Bankomat operator+(Bankomat Sub, unsigned addition) // try catch
 {
+	try // Try catch block works properly
+	{
+		if (addition < 0)
+		{
+			throw addition;
+		}
+		throw addition = 0;
+	}
+	catch (char*)
+	{
+		cerr << " We caught a char exception " << endl;
+	}
+	catch (int)
+	{
+		cerr << " We caught an int exception " << endl;
+	}
+	catch (...)
+	{
+		cerr << " We caught unknown exception " << endl;
+	}
 	Sub.sumBank += addition;
 	return Sub;
 }
@@ -86,7 +189,7 @@ char* Bankomat::operator()()
 	return (to_String());
 }
 
-Bankomat Bankomat::operator=(const Bankomat assignment)
+Bankomat Bankomat::operator=(const Bankomat &assignment)
 {
 	id = assignment.id;
 	sumBank = assignment.sumBank;

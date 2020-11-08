@@ -22,7 +22,7 @@ public:
 	friend bool operator>=(Bankomat, unsigned);
 	friend bool operator<(Bankomat, unsigned);
 	char* operator()();
-	Bankomat operator=(const Bankomat);
+	Bankomat operator=(const Bankomat &);
 private:
 	char* id = new char[100];
 	unsigned sumBank;
