@@ -8,11 +8,11 @@ using namespace std;
 int main()
 {
 	 // int sum, sumGet;
-	// char* n = new char[20];
-	const int f = 2;
-	Bankomat Jija[f];
-	for (int i = 0; i < f; i++)	
-	{Jija[i].in();	}
+	char* name = new char[20];
+	char* address = new char[20];
+	cout << " Input ID " << endl;
+	cin.getline(name, 20);
+	Bank_withHistory f(name,1500050,34934);
 	/* for (int i=0;i<no;i++) 
 	{
 	cout << " Input ID " << endl;
@@ -33,49 +33,11 @@ int main()
 	}
 	Bankomat func(n, sum, sumGet);
 	}*/
-
-	// Проверка записи в текстовый файл 
-	ofstream fout("text.txt", ios::out);
-		if (!fout)
-		{
-			cerr << "Error:unable to write to text.txt" << endl;
-			exit(1);
-		}
-		for (int i = 0; i < f; i++)
-		{
-			fout << Jija[i];
-		}
-		fout.close();
-		ifstream f1("text.txt", ios::in);
-		if (!f1)
-		{
-			cerr << "Can't open this file " << endl;
-			exit(1);
-		}
-		for (int i = 0; i < f; i++)
-		{
-			f1 >> Jija[i];
-		}
-	// Проверка записи в бинарный файл 
-	ofstream dat_file("Bankomat.dat", ios::binary);
-		if (!dat_file)
-		{
-			cerr << "Error:unable to write to dat file" << endl;
-			exit(1);
-		}
-		for (int i = 0; i < f; i++)
-		{
-			dat_file.write((char*)&Jija[i], sizeof(Jija[i]));
-		}
-		ifstream dat_file1("Bankomat.dat", ios::binary);
-		if (!dat_file1)
-		{
-			cerr << "Error: unable to read from dat file " << endl;
-			exit(1);
-		}
-		for (int i = 0; i < f; i++)
-		{
-			dat_file1.read((char*) &Jija[i], sizeof(Jija[i]));
-		}
+	/* cout << " Input name " << endl;
+	cin.getline(name,20);// С++ Считает пробел за начало нового ввода,это надо пофиксить. Пока не понимаю как. 
+	cout << " Input address " << endl;
+	cin.getline(address, 20); */
+	f.takeMoney(15000);
+	f.report();
 	return 0;
 }

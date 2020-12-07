@@ -37,3 +37,22 @@ int Bankomat::getM()
 {
 	return m_id;
 }
+unsigned Bank_transition::getIncome()
+{
+	return income;
+}
+unsigned Bank_transition::getRemain()
+{
+	return remain;
+}
+
+bool Bank_transition::getBool()
+{
+	return dickhead;
+}
+
+time_t Bank_transition::getTime()
+{
+	return now;
+}
+

@@ -1,6 +1,0 @@
-ID of ATM: 599k
-sum in ATM: 50405
-Max sum of Get: 5000
-ID of ATM: 34999ooooooo
-sum in ATM: 3400000
-Max sum of Get: 4999
