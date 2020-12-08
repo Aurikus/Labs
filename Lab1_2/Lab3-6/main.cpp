@@ -2,6 +2,8 @@
 #include <fstream>
 #include <algorithm>
 #include "Bankomat.h"
+#include "Bank_transition+Bank_withHistory.h"
+#include "Bank_nameAddress.h"
 
 using namespace std;
 
@@ -38,6 +40,17 @@ int main()
 	cout << " Input address " << endl;
 	cin.getline(address, 20); */
 	f.takeMoney(15000);
+	f.loadMoney(33333);
+	f.takeMoney(323);
+	f.takeMoney(4444);
+	f.takeMoney(15000);
+	f.loadMoney(33333);
+	f.takeMoney(323);
+	f.takeMoney(4444);
+	f.takeMoney(15000);
+	f.loadMoney(33333);
+	f.takeMoney(323);
+	f.takeMoney(4444);
 	f.report();
 	return 0;
 }

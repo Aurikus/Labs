@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Bankomat.h"
-
+#include "Bank_nameAddress.h"
+#include "Bank_transition+Bank_withHistory.h"
 using namespace std;
 
 void Bankomat::setId(char* id1)
@@ -55,4 +56,3 @@ time_t Bank_transition::getTime()
 {
 	return now;
 }
-

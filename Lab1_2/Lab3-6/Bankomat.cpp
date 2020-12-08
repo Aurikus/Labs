@@ -1,8 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <array>
 #include <algorithm>
 #include <exception>
 #include "Bankomat.h"
+#include "Bank_transition+Bank_withHistory.h"
+#include "Bank_nameAddress.h"
 #include <time.h>
 #include <string>
 #include "stdio.h"
@@ -79,12 +81,6 @@ unsigned Bankomat::takeMoney(unsigned sumTake)
 	return sumBank;
 }
 
-
-Bank_name_address::Bank_name_address(char* name, char* address)
-{
-	bankName = name;
-	bankAddress = address;
-}
 Bank_transition::Bank_transition()
 {
 
@@ -95,24 +91,17 @@ Bank_transition::Bank_transition()
 }
 Bank_transition::Bank_transition(unsigned pupa,unsigned buba ,bool dupa)
 {
-
 	now = time(0);
 	income = pupa;
 	remain = buba;
 	dickhead = dupa;
-}
-char* Bank_name_address::showName_Address()
-{
-	char* str = new char[100];
-	sprintf_s(str,100, "Name = %s, Address = %s", this->bankName, this->bankAddress);
-	return str;
 }
 
 unsigned Bank_withHistory::loadMoney(unsigned posos)
 {
 	unsigned save = Bankomat::loadMoney(posos);
 	arr[flag] = Bank_transition(posos, sumBank, true);
-	flag++;
+	flag = (flag +1) %10;
 	if (capacity < maxSize)
 	{
 		capacity++;
@@ -123,7 +112,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 {
 	unsigned save = Bankomat::takeMoney(silver);
 	arr[flag] = Bank_transition(silver, sumBank, false);
-	flag++;
+	flag = (flag + 1) % 10;
 	if (capacity < maxSize)
 	{
 		capacity++;
@@ -146,8 +135,7 @@ void Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < index; i++)
 		{
-			cout << arr[index] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
-			index = (index + 1) % 10;
+			cout << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
 		}
 	}
 }
@@ -229,7 +217,10 @@ std::ostream& operator<<(std::ostream& os,const Bankomat &p)
 
 std::ostream& operator<<(std::ostream& os, const Bank_transition& p)
 {
-	os << "Time of transition: " << p.now << "\nsum of taking/loading " << p.income << "\nsum of remaining: " << p.remain << endl;
+	char buff[20];
+	strftime(buff, 20, "%d/%m/%Y:%H:%M:%S", localtime(&p.now));
+	string s(buff);
+	os << "Time of transition: " << s << "\nsum of taking/loading " << p.income << "\nsum of remaining: " << p.remain << endl;
 	return os;
 }
 
