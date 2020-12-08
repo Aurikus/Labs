@@ -49,7 +49,7 @@ unsigned Bank_transition::getRemain()
 
 bool Bank_transition::getBool()
 {
-	return dickhead;
+	return get;
 }
 
 time_t Bank_transition::getTime()

@@ -9,17 +9,19 @@ public:
 	time_t getTime();
 	Bank_transition();
 	Bank_transition(unsigned, unsigned, bool); // конструктор создания 
+	~Bank_transition();
 private:
 	time_t now;
 	unsigned income;
 	unsigned remain;
-	bool dickhead;
+	bool get;
 };
 
 class Bank_withHistory : private Bankomat  // Массив 
 {
 public:
 	Bank_withHistory(char*, unsigned, unsigned);
+	~Bank_withHistory();
 	// Bank_transition* arr = new Bank_transition[10];
 	void report();
 	unsigned loadMoney(unsigned);

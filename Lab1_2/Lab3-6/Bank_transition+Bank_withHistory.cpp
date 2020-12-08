@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <sstream>
 #include <iostream>
 #include <algorithm>
 #include <exception>
@@ -17,24 +18,49 @@ Bank_withHistory::Bank_withHistory(char* id1, unsigned sumBank1, unsigned sumMax
 
 Bank_transition::Bank_transition()
 {
-
 	now = time(0);
 	income = 1000;
 	remain = 10000;
-	dickhead = true;
-}
-Bank_transition::Bank_transition(unsigned pupa, unsigned buba, bool dupa)
-{
-	now = time(0);
-	income = pupa;
-	remain = buba;
-	dickhead = dupa;
+	get = true;
 }
 
-unsigned Bank_withHistory::loadMoney(unsigned posos)
+Bank_transition::Bank_transition(unsigned income1, unsigned remain1, bool get1)
 {
-	unsigned save = Bankomat::loadMoney(posos);
-	arr[flag] = Bank_transition(posos, sumBank, true);
+	now = time(0);
+	income = income1;
+	remain = remain1;
+	get = get1;
+}
+~Bank_transition()
+{
+	delete[] now;
+	delete[] income;
+	delete[] remain;
+}
+
+~Bank_withHistory()
+{
+	delete[] arr;
+	delete[] capacity;
+	delete[] maxSize;
+	delete[] flag;
+}
+
+unsigned Bank_withHistory::loadMoney(unsigned getting)
+{
+	try
+	{
+		if (getting < 0)
+		{
+			throw std::invalid_argument("Invalid arg");
+		}
+	}
+	catch (const std::invalid_argument & err)
+	{
+		cerr << " Invalid argument: " << err.what() << endl;
+	}
+	unsigned save = Bankomat::loadMoney(getting);
+	arr[flag] = Bank_transition(getting, sumBank, true);
 	flag = (flag + 1) % 10;
 	if (capacity < maxSize)
 	{
@@ -44,6 +70,17 @@ unsigned Bank_withHistory::loadMoney(unsigned posos)
 }
 unsigned Bank_withHistory::takeMoney(unsigned silver)
 {
+	try // Try catch block works properly
+	{
+		if (silver < 0)
+		{
+			throw std::invalid_argument("Invalid arg");
+		}
+	}
+	catch (const std::invalid_argument & err)
+	{
+		cerr << " Invalid argument: " << err.what() << endl;
+	}
 	unsigned save = Bankomat::takeMoney(silver);
 	arr[flag] = Bank_transition(silver, sumBank, false);
 	flag = (flag + 1) % 10;
@@ -53,14 +90,17 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 	}
 	return save;
 }
+
+
 void Bank_withHistory::report()
 {
+	std::stringstream ss;
 	if (capacity == maxSize) // capacity è size ðàçîáðàòüñÿ
 	{
 		int index = flag;
 		for (int i = 0; i < maxSize; i++)
 		{
-			cout << arr[index] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
+			ss << arr[index]; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
 			index = (index + 1) % 10;
 		}
 	}
@@ -69,10 +109,11 @@ void Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < index; i++)
 		{
-			cout << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
+			ss << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
 		}
 	}
 }
+
 
 std::ostream& operator<<(std::ostream& os, const Bank_transition& p)
 {
