@@ -23,7 +23,7 @@ public:
 	Bank_withHistory(char*, unsigned, unsigned);
 	~Bank_withHistory();
 	// Bank_transition* arr = new Bank_transition[10];
-	void report();
+	char* report();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);
 private:

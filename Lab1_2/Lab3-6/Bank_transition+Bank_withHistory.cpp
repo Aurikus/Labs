@@ -92,7 +92,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 }
 
 
-void Bank_withHistory::report()
+char* Bank_withHistory::report()
 {
 	std::stringstream ss;
 	if (capacity == maxSize) // capacity è size ðàçîáðàòüñÿ
@@ -100,7 +100,8 @@ void Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < maxSize; i++)
 		{
-			ss << arr[index]; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
+			ss << arr[index];
+			// TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
 			index = (index + 1) % 10;
 		}
 	}
@@ -109,9 +110,10 @@ void Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < index; i++)
 		{
-			ss << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
+			ss << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ
 		}
 	}
+	return ss.str().c_str();;
 }
 
 
