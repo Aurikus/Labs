@@ -12,12 +12,15 @@ int capacity = 0;
 int maxSize = 10;
 int sumBank = 1999999;
 
-class Bank_transition  // Âêëþ÷àåò â ñåáÿ èíôîðìàöèþ çà îäíó òðàíçàêöèþ: Äàòà, Ñóììà ñíÿòèÿ ëèáî çà÷èñëåíèÿ è îñòàòîê 
+class Bank_transition  
 {
 public:
 	Bank_transition();
 	Bank_transition(unsigned, unsigned, bool);
 	time_t now;
+	unsigned loadMoney(unsigned);
+	unsigned takeMoney(unsigned);
+	const char* report();
 	unsigned income;
 	unsigned remain;
 	bool get;
@@ -50,7 +53,7 @@ Bank_transition::Bank_transition(unsigned income1, unsigned remain1, bool get1)
 	get = get1;
 }
 
-unsigned loadMoney(unsigned getting)
+unsigned Bank_transition::loadMoney(unsigned getting)
 {	
 	unsigned save = loadMoney(getting);
 	arr[flag] = Bank_transition(getting, sumBank, true);
@@ -61,7 +64,7 @@ unsigned loadMoney(unsigned getting)
 	}
 	return save;
 }
-unsigned takeMoney(unsigned silver)
+unsigned Bank_transition::takeMoney(unsigned silver)
 {
 	unsigned save = takeMoney(silver);
 	arr[flag] = Bank_transition(silver, sumBank, false);
@@ -74,7 +77,7 @@ unsigned takeMoney(unsigned silver)
 }
 
 
-char* report()
+const char* Bank_transition::report()
 {
 	std::stringstream ss;
 	if (capacity == maxSize)
@@ -99,18 +102,19 @@ char* report()
 
 int main()
 {
-		loadMoney(33333);
-		takeMoney(323);
-		takeMoney(4444);
-		takeMoney(15000);
-		loadMoney(33333);
-		takeMoney(323);
-		takeMoney(4444);
-		takeMoney(15000);
-		loadMoney(33333);
-		takeMoney(323);
-		takeMoney(4444);
-		report();
+	Bank_transition fu;
+		fu.loadMoney(33333);
+		fu.takeMoney(323);
+		fu.takeMoney(4444);
+		fu.takeMoney(15000);
+		fu.loadMoney(33333);
+		fu.takeMoney(323);
+		fu.takeMoney(4444);
+		fu.takeMoney(15000);
+		fu.loadMoney(33333);
+		fu.takeMoney(323);
+		fu.takeMoney(4444);
+		fu.report();
 		return 0;
 }
 
