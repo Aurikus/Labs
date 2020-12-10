@@ -10,7 +10,7 @@ Bank_name_address::Bank_name_address(char* name, char* address)
 	bankAddress = address;
 }
 
-~Bank_name_address()
+Bank_name_address::~Bank_name_address()
 {
 	delete[] bankName;
 	delete[] bankAddress;

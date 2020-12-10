@@ -18,7 +18,7 @@ Bank_withHistory::Bank_withHistory(char* id1, unsigned sumBank1, unsigned sumMax
 
 Bank_transition::Bank_transition()
 {
-	now = time(0);
+	time = time(0);
 	income = 1000;
 	remain = 10000;
 	get = true;
@@ -26,14 +26,14 @@ Bank_transition::Bank_transition()
 
 Bank_transition::Bank_transition(unsigned income1, unsigned remain1, bool get1)
 {
-	now = time(0);
+	time = time(0);
 	income = income1;
 	remain = remain1;
 	get = get1;
 }
 ~Bank_transition()
 {
-	delete[] now;
+	delete[] time;
 	delete[] income;
 	delete[] remain;
 }
@@ -95,13 +95,12 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 char* Bank_withHistory::report()
 {
 	std::stringstream ss;
-	if (capacity == maxSize) // capacity è size ðàçîáðàòüñÿ
+	if (capacity == maxSize)
 	{
 		int index = flag;
 		for (int i = 0; i < maxSize; i++)
 		{
-			ss << arr[index];
-			// TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ 
+			ss << arr[index]; 
 			index = (index + 1) % 10;
 		}
 	}
@@ -110,7 +109,7 @@ char* Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < index; i++)
 		{
-			ss << arr[i] << endl; // TODO:ÏÅÐÅÃÐÓÇÈÒÜ ÎÏÅÐÀÒÎÐ
+			ss << arr[i] << endl;
 		}
 	}
 	return ss.str().c_str();;
@@ -120,9 +119,8 @@ char* Bank_withHistory::report()
 std::ostream& operator<<(std::ostream& os, const Bank_transition& p)
 {
 	char buff[20];
-	strftime(buff, 20, "%d/%m/%Y:%H:%M:%S", localtime(&p.now));
+	strftime(buff, 20, "%d/%m/%Y:%H:%M:%S", localtime(&p.time));
 	string s(buff);
 	os << "Time of transition: " << s << "\nsum of taking/loading " << p.income << "\nsum of remaining: " << p.remain << endl;
 	return os;
 }
-

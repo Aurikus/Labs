@@ -11,18 +11,17 @@ public:
 	Bank_transition(unsigned, unsigned, bool); // конструктор создания 
 	~Bank_transition();
 private:
-	time_t now;
+	time_t time;
 	unsigned income;
 	unsigned remain;
 	bool get;
 };
 
-class Bank_withHistory : private Bankomat  // Массив 
+class Bank_withHistory : protected Bankomat  // Массив 
 {
 public:
 	Bank_withHistory(char*, unsigned, unsigned);
 	~Bank_withHistory();
-	// Bank_transition* arr = new Bank_transition[10];
 	char* report();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);

@@ -17,15 +17,14 @@ public:
 	Bankomat(const Bankomat& Bankomat);
 	Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1);
 	~Bankomat();
-	void in();
 	friend Bankomat operator-(Bankomat, unsigned);
 	friend Bankomat operator+(Bankomat, unsigned);
 	friend bool operator>=(Bankomat, unsigned);
 	friend bool operator<(Bankomat, unsigned);
 	char* operator()();
 	Bankomat operator=(const Bankomat &);
-	friend std::ostream& operator<<(std::ostream&,const Bankomat& );
-	friend std::istream& operator>>(std::istream&, Bankomat&);
+	friend std::ostream& operator<<(std::ostream&,const Bankomat&);
+	friend std::istream& operator>>(std::istream&,Bankomat&);
 private:
 	static int s_idGenerator;
 	int m_id;
