@@ -1,0 +1,35 @@
+#pragma once
+class Bankomat
+{
+public:
+	void setId(char*);
+	char* getId();
+	void setSumBank(unsigned);
+	unsigned getSumBank();
+	void setSumMaxGet(unsigned);
+	unsigned getSumMaxGet();
+	void setM(int);
+	int getM();
+	unsigned loadMoney(unsigned);
+	unsigned takeMoney(unsigned);
+	char* to_String();
+	Bankomat();
+	Bankomat(const Bankomat& Bankomat);
+	Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1);
+	~Bankomat();
+	friend Bankomat operator-(Bankomat, unsigned);
+	friend Bankomat operator+(Bankomat, unsigned);
+	friend bool operator>=(Bankomat, unsigned);
+	friend bool operator<(Bankomat, unsigned);
+	char* operator()();
+	Bankomat operator=(const Bankomat &);
+	friend std::ostream& operator<< (std::ostream&, const Bankomat &Bankomat);
+	friend std::istream& operator>> (std::istream&,Bankomat &Bankomat);
+private:
+	static int s_idGenerator;
+	int m_id;
+protected:
+	char* id = new char[100];
+	unsigned sumMaxGet;
+	unsigned sumBank;
+};
