@@ -2,7 +2,6 @@
 class Bank_transition  // Включает в себя информацию за одну транзакцию: Дата, Сумма снятия либо зачисления и остаток 
 {
 public:
-	friend std::ostream& operator<<(std::ostream&, const Bank_transition&);
 	unsigned getIncome();
 	unsigned getRemain();
 	bool getBool();
@@ -10,6 +9,7 @@ public:
 	Bank_transition();
 	Bank_transition(unsigned, unsigned, bool); // конструктор создания 
 	~Bank_transition();
+	friend std::ostream& operator<<(std::ostream&, const Bank_transition& Bank_transition);
 private:
 	time_t time;
 	unsigned income;
@@ -17,12 +17,12 @@ private:
 	bool get;
 };
 
-class Bank_withHistory : protected Bankomat  // Массив 
+class Bank_withHistory : private Bankomat  // Массив 
 {
 public:
 	Bank_withHistory(char*, unsigned, unsigned);
 	~Bank_withHistory();
-	char* report();
+	virtual const char* report();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);
 private:

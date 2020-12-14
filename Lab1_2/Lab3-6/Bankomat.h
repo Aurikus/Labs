@@ -23,8 +23,8 @@ public:
 	friend bool operator<(Bankomat, unsigned);
 	char* operator()();
 	Bankomat operator=(const Bankomat &);
-	friend std::ostream& operator<<(std::ostream&,const Bankomat&);
-	friend std::istream& operator>>(std::istream&,Bankomat&);
+	friend std::ostream& operator<< (std::ostream&, const Bankomat &Bankomat);
+	friend std::istream& operator>> (std::istream&,Bankomat &Bankomat);
 private:
 	static int s_idGenerator;
 	int m_id;

@@ -3,8 +3,9 @@
 #include <iostream>
 #include <algorithm>
 #include <exception>
+#include "Bankomat.h"
 #include "Bank_transition+Bank_withHistory.h"
-#include <time.h>
+#include <ctime>
 #include "stdio.h"
 
 
@@ -18,7 +19,7 @@ Bank_withHistory::Bank_withHistory(char* id1, unsigned sumBank1, unsigned sumMax
 
 Bank_transition::Bank_transition()
 {
-	time = time(0);
+	time = std::time(0);
 	income = 1000;
 	remain = 10000;
 	get = true;
@@ -26,24 +27,17 @@ Bank_transition::Bank_transition()
 
 Bank_transition::Bank_transition(unsigned income1, unsigned remain1, bool get1)
 {
-	time = time(0);
+	time = std::time(0);
 	income = income1;
 	remain = remain1;
 	get = get1;
 }
-~Bank_transition()
-{
-	delete[] time;
-	delete[] income;
-	delete[] remain;
-}
+Bank_transition::~Bank_transition()
+{}
 
-~Bank_withHistory()
+Bank_withHistory::~Bank_withHistory()
 {
 	delete[] arr;
-	delete[] capacity;
-	delete[] maxSize;
-	delete[] flag;
 }
 
 unsigned Bank_withHistory::loadMoney(unsigned getting)
@@ -57,7 +51,7 @@ unsigned Bank_withHistory::loadMoney(unsigned getting)
 	}
 	catch (const std::invalid_argument & err)
 	{
-		cerr << " Invalid argument: " << err.what() << endl;
+		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	unsigned save = Bankomat::loadMoney(getting);
 	arr[flag] = Bank_transition(getting, sumBank, true);
@@ -79,7 +73,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 	}
 	catch (const std::invalid_argument & err)
 	{
-		cerr << " Invalid argument: " << err.what() << endl;
+		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	unsigned save = Bankomat::takeMoney(silver);
 	arr[flag] = Bank_transition(silver, sumBank, false);
@@ -92,7 +86,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 }
 
 
-char* Bank_withHistory::report()
+const char* Bank_withHistory::report()
 {
 	std::stringstream ss;
 	if (capacity == maxSize)
@@ -109,18 +103,17 @@ char* Bank_withHistory::report()
 		int index = flag;
 		for (int i = 0; i < index; i++)
 		{
-			ss << arr[i] << endl;
+			ss << arr[i] << std::endl;
 		}
 	}
 	return ss.str().c_str();;
 }
 
-
 std::ostream& operator<<(std::ostream& os, const Bank_transition& p)
 {
 	char buff[20];
 	strftime(buff, 20, "%d/%m/%Y:%H:%M:%S", localtime(&p.time));
-	string s(buff);
-	os << "Time of transition: " << s << "\nsum of taking/loading " << p.income << "\nsum of remaining: " << p.remain << endl;
+	std::string s(buff);
+	os << "Time of transition: " << s << "\nsum of taking/loading " << p.income << "\nsum of remaining: " << p.remain << std::endl;
 	return os;
 }

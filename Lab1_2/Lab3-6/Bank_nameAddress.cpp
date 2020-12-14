@@ -1,8 +1,11 @@
 #include <iostream>
-#include "Bank_nameAddress.h"
 #include <string>
 #include "stdio.h"
+#include "Bankomat.h"
+#include "Bank_nameAddress.h"
 
+
+using namespace std;
 
 Bank_name_address::Bank_name_address(char* name, char* address)
 {

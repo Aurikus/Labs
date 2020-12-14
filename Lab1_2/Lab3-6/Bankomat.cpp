@@ -1,13 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string>
+#include "stdio.h"
+#include <time.h>
 #include <algorithm>
 #include <exception>
 #include "Bankomat.h"
-#include "Bank_transition+Bank_withHistory.h"
-#include "Bank_nameAddress.h"
-#include <time.h>
-#include <string>
-#include "stdio.h"
 
 using namespace std;
 
@@ -40,16 +38,16 @@ Bankomat::~Bankomat()
 
 unsigned Bankomat::loadMoney(unsigned sumLoad)
 {
-	try // Try catch block works properly
+	try
 	{
 		if (sumLoad < 0)
 		{
-			throw std::exception();
+			throw std::invalid_argument("Invalid arg");
 		}
 	}
-	catch(const std::exception& err) 
+	catch (const std::invalid_argument & err)
 	{
-		cerr << " We caught an exception " << endl;
+		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	sumBank += sumLoad;
 	return sumBank;
@@ -57,16 +55,16 @@ unsigned Bankomat::loadMoney(unsigned sumLoad)
 
 unsigned Bankomat::takeMoney(unsigned sumTake)
 {
-	try // Try catch block works properly
+	try
 	{
 		if (sumTake < 0)
 		{
-			throw std::exception();
+			throw std::invalid_argument("Invalid arg");
 		}
 	}
-	catch (const std::exception& err)
+	catch (const std::invalid_argument & err)
 	{
-		cerr << " We caught an exception " << endl;
+		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	if ((sumBank >= sumTake) && (sumTake <= sumMaxGet))
 	{
@@ -122,13 +120,13 @@ Bankomat operator+(Bankomat Sub, unsigned addition) // try catch
 	return Sub;
 }
 
-bool operator>=(Bankomat Sub, unsigned compare)
+bool Bankomat::operator>=(Bankomat Sub)
 {
-	return (Sub.sumBank >= compare);
+	return (strcmp(Sub.getId(), id));
 }
-bool operator<(Bankomat Sub, unsigned compare)
+bool Bankomat::operator<(Bankomat Sub)
 {
-	return !(Sub.sumBank >= compare);
+	return !(strcmp(Sub.getId(), id));
 }
 
 char* Bankomat::operator()()

@@ -54,5 +54,5 @@ bool Bank_transition::getBool()
 
 time_t Bank_transition::getTime()
 {
-	return now;
+	return time;
 }
