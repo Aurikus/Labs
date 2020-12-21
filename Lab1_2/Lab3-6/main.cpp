@@ -9,10 +9,18 @@
 
 using namespace std;
 
-void TestingPolymorphismQuality(Bankomat* Check, Bank_withHistory* Check1)
+void TestingPolymorphismQuality(Bankomat* Check, Bank_withHistory* Check1, Bi_tree Check2)
 {
 	Check->toString();
 	Check1->toString();
+	Check2.toString();
+	if (Check->toString() == Check2.toString())
+		cout << " All is working right " << endl;
+	else
+	{
+		cout << " All is bad " << endl;
+		assert(&Check2);
+	}
 }
 void TestingTreePushRemove(Bankomat* sir, Bi_tree frien, Bankomat* sir1,Bankomat* sir2)
 {
