@@ -88,7 +88,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 }
 
 
-const char* Bank_withHistory::report()
+const char* Bank_withHistory::toString()
 {
 	std::stringstream ss;
 	if (capacity == maxSize)

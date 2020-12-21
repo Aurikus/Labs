@@ -19,7 +19,7 @@ Bank_name_address::~Bank_name_address()
 	delete[] bankAddress;
 }
 
-char* Bank_name_address::showName_Address()
+char* Bank_name_address::toString()
 {
 	char* str = new char[100];
 	sprintf_s(str, 100, "Name = %s, Address = %s", this->bankName, this->bankAddress);

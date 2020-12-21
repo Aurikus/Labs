@@ -10,9 +10,9 @@ public:
 	unsigned getSumMaxGet();
 	void setM(int);
 	int getM();
-	virtual unsigned loadMoney(unsigned);
-	virtual unsigned takeMoney(unsigned);
-	char* to_String();
+	unsigned loadMoney(unsigned);
+	unsigned takeMoney(unsigned);
+	virtual char* to_String();
 	Bankomat();
 	Bankomat(const Bankomat& Bankomat);
 	Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1);

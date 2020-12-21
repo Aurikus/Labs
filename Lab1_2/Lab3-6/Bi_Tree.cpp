@@ -4,20 +4,20 @@
 #include "Node.h"
 
 
-Node::Node(Bankomat* f)
+Bi_tree::Bi_tree(Bankomat* f)
 {
 	value = f;
 	l, r = NULL;
 }
 
-Node::Node() {
+Bi_tree::Bi_tree() {
 	value = NULL;
 }
 
-Node* tree = NULL;
+Bi_tree* tree = NULL;
 
 /*ÔÓÍÊÖÈß ÇÀÏÈÑÈ ÎÁÚÅÊÒÀ Â ÁÈÍÀÐÍÎÅ ÄÅÐÅÂÎ*/
-void Node::push(Bankomat* a)
+void Bi_tree::push(Bankomat* a)
 {
 	if (value == NULL) {
 		value = a;
@@ -25,8 +25,8 @@ void Node::push(Bankomat* a)
 	}
 	if (l == NULL && r == NULL)
 	{
-		l = new Node(a);
-		r = new Node(value);
+		l = new Bi_tree(a);
+		r = new Bi_tree(value);
 		if (l->value > r->value)
 		{
 			Bankomat* buff = r->value;
@@ -43,7 +43,7 @@ void Node::push(Bankomat* a)
 	else
 	{
 		if (r == NULL) {
-			r = new Node(a);
+			r = new Bi_tree(a);
 		}
 		else {
 			r->push(a);
@@ -57,7 +57,7 @@ void Node::push(Bankomat* a)
 	}
 }
 
-void Node::remove(Bankomat* a)
+void Bi_tree::remove(Bankomat* a)
 {
 	if (value == NULL) {
 		return;
@@ -96,7 +96,7 @@ void Node::remove(Bankomat* a)
 	}
 }
 
-Bankomat* Node::find(char* id) {
+Bankomat* Bi_tree::find(char* id) {
 	if (value == NULL) {
 		return NULL;
 	}
@@ -117,7 +117,7 @@ Bankomat* Node::find(char* id) {
 	}
 }
 
-void Node::print()
+void Bi_tree::toString()
 {
 	if (value == NULL) return;
 	if (l == NULL && r == NULL)
@@ -125,9 +125,9 @@ void Node::print()
 		std::cout << *value << std::endl;
 	}
 	if (l != NULL) {
-		l->print();
+		l->toString();
 	}
 	if (r != NULL) {
-		r->print();
+		r->toString();
 	}
 }

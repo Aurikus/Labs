@@ -49,7 +49,7 @@ void TestingPolymorphismQuality(Bankomat* Check)
 	}
 
 }
-void TestingTreePushRemove(Bankomat* sir, Node frien, Bankomat* sir1,Bankomat* sir2)
+void TestingTreePushRemove(Bankomat* sir, Bi_tree frien, Bankomat* sir1,Bankomat* sir2)
 {
 	frien.push(sir);
 	frien.push(sir1);
@@ -58,7 +58,7 @@ void TestingTreePushRemove(Bankomat* sir, Node frien, Bankomat* sir1,Bankomat* s
 	frien.print();
 	cout << "  If tree was shown with 2 elements then function of removing and pushing are working correctly " << endl;
 }
-void TestingTreeFind(Bankomat* sir, Node frien, Bankomat* sir1, Bankomat* sir2)
+void TestingTreeFind(Bankomat* sir, Bi_tree frien, Bankomat* sir1, Bankomat* sir2)
 {
 	char* Find = new char[20];
 	cin.getline(Find, 20);
@@ -86,7 +86,7 @@ int main()
 	Bankomat sir(name,15000, 5000);
 	Bankomat sir1(name1, 15000, 5000);
 	Bankomat sir2(name2, 15000, 5000);
-	Node frien;
+	Bi_tree frien;
 	TestingPolymorphismQuality(&sir);
 	TestingPolymorphismQuality(&sir1);
 	TestingPolymorphismQuality(&sir2);
