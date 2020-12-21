@@ -8,7 +8,7 @@ public:
 	void push(Bankomat*);
 	void remove(Bankomat*);
 	Bankomat* find(char*);
-	virtual void toString();
+	virtual char* toString();
 private:
 	Bi_tree* l, * r;
 	Bankomat* value;

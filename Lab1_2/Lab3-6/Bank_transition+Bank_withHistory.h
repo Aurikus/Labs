@@ -22,7 +22,7 @@ class Bank_withHistory : private Bankomat  // Массив
 public:
 	Bank_withHistory(char*, unsigned, unsigned);
 	~Bank_withHistory();
-	virtual const char* toString();
+	virtual char* toString();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);
 private:

@@ -73,7 +73,7 @@ unsigned Bankomat::takeMoney(unsigned sumTake)
 	return sumBank;
 }
 
-char* Bankomat::to_String()
+char* Bankomat::toString()
 {
 	char* str = new char[100];
 	sprintf_s(str, 100, "ID = %s, Sum in Bankomat = %d, Max sum of getting = %d", this->id, this->sumBank, this->sumMaxGet);
@@ -150,7 +150,7 @@ bool Bankomat::operator==(char* sub)
 
 char* Bankomat::operator()()
 {
-	return (to_String());
+	return (toString());
 }
 Bankomat Bankomat::operator=(const Bankomat &assignment)
 {

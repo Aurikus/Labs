@@ -9,45 +9,10 @@
 
 using namespace std;
 
-void TestingPolymorphismQuality(Bankomat* Check)
+void TestingPolymorphismQuality(Bankomat* Check, Bank_withHistory* Check1)
 {
-	Check->takeMoney(1340);
-	if (Check->getSumBank() == 13600)
-	{
-		cout << "If was written, that it's a child function, then Child Function was called with Polymorphism " << endl;
-	}
-	else
-	{
-		assert(Check);
-	}
-	Check->loadMoney(1340);
-	if (Check->getSumBank() == 15000)
-	{
-		cout << "If was written, that it's a child function, then Child Function was called with Polymorphism " << endl;
-	}
-	else
-	{
-		assert(Check);
-	}
-	Check->takeMoney(1340);
-	if (Check->getSumBank() == 13600)
-	{
-		cout << "If was written, that it's a child function, then Child Function was called with Polymorphism " << endl;
-	}
-	else
-	{
-		assert(Check);
-	}
-	Check->loadMoney(1340);
-	if (Check->getSumBank() == 15000)
-	{
-		cout << "If was written, that it's a child function, then Child Function was called with Polymorphism " << endl;
-	}
-	else
-	{
-		assert(Check);
-	}
-
+	Check->toString();
+	Check1->toString();
 }
 void TestingTreePushRemove(Bankomat* sir, Bi_tree frien, Bankomat* sir1,Bankomat* sir2)
 {
@@ -55,7 +20,7 @@ void TestingTreePushRemove(Bankomat* sir, Bi_tree frien, Bankomat* sir1,Bankomat
 	frien.push(sir1);
 	frien.push(sir2);
 	frien.remove(sir2);
-	frien.print();
+	frien.toString();
 	cout << "  If tree was shown with 2 elements then function of removing and pushing are working correctly " << endl;
 }
 void TestingTreeFind(Bankomat* sir, Bi_tree frien, Bankomat* sir1, Bankomat* sir2)
@@ -86,10 +51,11 @@ int main()
 	Bankomat sir(name,15000, 5000);
 	Bankomat sir1(name1, 15000, 5000);
 	Bankomat sir2(name2, 15000, 5000);
+	Bank_withHistory bla(name3, 13434, 340);
 	Bi_tree frien;
-	TestingPolymorphismQuality(&sir);
-	TestingPolymorphismQuality(&sir1);
-	TestingPolymorphismQuality(&sir2);
+	TestingPolymorphismQuality(&sir, &bla);
+	TestingPolymorphismQuality(&sir1,&bla);
+	TestingPolymorphismQuality(&sir2,&bla);
 	TestingTreePushRemove(&sir,frien,&sir1,&sir2);
 	TestingTreeFind(&sir,frien, &sir1,&sir2);
 	return 0;

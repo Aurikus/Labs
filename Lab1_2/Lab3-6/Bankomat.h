@@ -12,7 +12,7 @@ public:
 	int getM();
 	unsigned loadMoney(unsigned);
 	unsigned takeMoney(unsigned);
-	virtual char* to_String();
+	virtual char* toString();
 	Bankomat();
 	Bankomat(const Bankomat& Bankomat);
 	Bankomat(char* id1, unsigned sumBank1, unsigned sumMaxGet1);

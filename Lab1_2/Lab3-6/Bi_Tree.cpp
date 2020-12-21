@@ -117,7 +117,7 @@ Bankomat* Bi_tree::find(char* id) {
 	}
 }
 
-void Bi_tree::toString()
+char* Bi_tree::toString()
 {
 	if (value == NULL) return;
 	if (l == NULL && r == NULL)
@@ -130,4 +130,5 @@ void Bi_tree::toString()
 	if (r != NULL) {
 		r->toString();
 	}
+	return 0;
 }
