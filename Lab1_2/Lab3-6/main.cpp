@@ -9,16 +9,23 @@
 
 using namespace std;
 
-void TestingPolymorphismQuality(Bankomat* Check, Bank_withHistory* Check1, Bi_tree Check2)
+void TestingPolymorphismQuality(Bi_tree Check2)
 {
-	Check->toString();
-	Check1->toString();
-	Check2.toString();
-	if (Check->toString() == Check2.toString())
-		cout << " All is working right " << endl;
+	char* namee = new char[20];
+
+	char* namee1 = new char[20];
+	const char* m = " 123asd,15000,5000";
+	cin.getline(namee,20);
+	cin.getline(namee1, 20);
+	Bank_withHistory bla(namee1, 15000, 5000);
+	Bankomat address(namee,15000,5000);
+	if ((address.toString() == m) && (Check2.toString() == m) && (bla.toString() == m ))
+	{
+		cout << " Polymorphism working properly " << endl;
+	}
 	else
 	{
-		cout << " All is bad " << endl;
+		cout << "Polymorphism is suck " << endl;
 		assert(&Check2);
 	}
 }
@@ -61,9 +68,7 @@ int main()
 	Bankomat sir2(name2, 15000, 5000);
 	Bank_withHistory bla(name3, 13434, 340);
 	Bi_tree frien;
-	TestingPolymorphismQuality(&sir, &bla);
-	TestingPolymorphismQuality(&sir1,&bla);
-	TestingPolymorphismQuality(&sir2,&bla);
+	TestingPolymorphismQuality(frien);
 	TestingTreePushRemove(&sir,frien,&sir1,&sir2);
 	TestingTreeFind(&sir,frien, &sir1,&sir2);
 	return 0;
