@@ -54,6 +54,7 @@ unsigned Bank_withHistory::loadMoney(unsigned getting)
 		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	unsigned save = Bankomat::loadMoney(getting);
+	std::cout << " It's child function " << std::endl;
 	arr[flag] = Bank_transition(getting, sumBank, true);
 	flag = (flag + 1) % 10;
 	if (capacity < maxSize)
@@ -76,6 +77,7 @@ unsigned Bank_withHistory::takeMoney(unsigned silver)
 		std::cerr << " Invalid argument: " << err.what() << std::endl;
 	}
 	unsigned save = Bankomat::takeMoney(silver);
+	std::cout << " It's child function " << std::endl;
 	arr[flag] = Bank_transition(silver, sumBank, false);
 	flag = (flag + 1) % 10;
 	if (capacity < maxSize)

@@ -120,14 +120,33 @@ Bankomat operator+(Bankomat Sub, unsigned addition) // try catch
 	return Sub;
 }
 
-bool Bankomat::operator>=(Bankomat Sub)
+bool Bankomat::operator>(Bankomat sub)
 {
-	return (strcmp(Sub.getId(), id));
+	return (strcmp(sub.getId(), id)) > 0;
 }
-bool Bankomat::operator<(Bankomat Sub)
+bool Bankomat::operator<(Bankomat sub)
 {
-	return !(strcmp(Sub.getId(), id));
+	return (strcmp(sub.getId(), id)) < 0;
 }
+bool Bankomat::operator==(Bankomat sub)
+{
+	return (strcmp(sub.getId(), id)) == 0;
+}
+bool Bankomat::operator<(char* sub)
+{
+	return (strcmp(sub, id)) == 0;
+}
+
+bool Bankomat::operator>(char* sub)
+{
+	return (strcmp(sub, id)) == 0;
+}
+
+bool Bankomat::operator==(char* sub)
+{
+	return (strcmp(sub, id)) == 0;
+}
+
 
 char* Bankomat::operator()()
 {

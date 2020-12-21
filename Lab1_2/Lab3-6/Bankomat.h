@@ -10,8 +10,8 @@ public:
 	unsigned getSumMaxGet();
 	void setM(int);
 	int getM();
-	unsigned loadMoney(unsigned);
-	unsigned takeMoney(unsigned);
+	virtual unsigned loadMoney(unsigned);
+	virtual unsigned takeMoney(unsigned);
 	char* to_String();
 	Bankomat();
 	Bankomat(const Bankomat& Bankomat);
@@ -19,8 +19,12 @@ public:
 	~Bankomat();
 	friend Bankomat operator-(Bankomat, unsigned);
 	friend Bankomat operator+(Bankomat, unsigned);
-	friend bool operator>=(Bankomat, unsigned);
-	friend bool operator<(Bankomat, unsigned);
+	bool operator>(Bankomat);
+	bool operator<(Bankomat);
+	bool operator==(Bankomat);
+	bool operator>(char*);
+	bool operator<(char*);
+	bool operator==(char*);
 	char* operator()();
 	Bankomat operator=(const Bankomat &);
 	friend std::ostream& operator<< (std::ostream&, const Bankomat &Bankomat);

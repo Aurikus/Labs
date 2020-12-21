@@ -1,15 +1,8 @@
 #include <iostream>
 #include "Bankomat.h"
 #include "Bank_transition+Bank_withHistory.h"
+#include "Node.h"
 
-
-class Node
-{
-public:
-	Bankomat* value;                          
-	Node* l, * r;                        //Левая и Правая часть дерева
-	Node(Bankomat*);
-};
 
 Node::Node(Bankomat* f)
 {
@@ -17,69 +10,124 @@ Node::Node(Bankomat* f)
 	l, r = NULL;
 }
 
-Node* tree = NULL;                      
+Node::Node() {
+	value = NULL;
+}
+
+Node* tree = NULL;
 
 /*ФУНКЦИЯ ЗАПИСИ ОБЪЕКТА В БИНАРНОЕ ДЕРЕВО*/
-void push(Bankomat* a, Node** t)
+void Node::push(Bankomat* a)
 {
-	if ((*t) == NULL) 
-	{
-		(*t) = new Node(a);
-		return;                         
-	}
-	//Дерево есть
-	if ((*t)->l == NULL && (*t)->r == NULL)
-	{
-		(*t)->l = new Node(a);
-		(*t)->r = new Node((*t)->value);
-		if ((*t)->l->value > (*t)->r->value)
-		{
-			Bankomat* buff = (*t)->r->value;
-			(*t)->r->value = (*t)->l->value;
-			(*t)->l->value = buff;
-		}
-		(*t)->value = (*t)->r->value;
+	if (value == NULL) {
+		value = a;
 		return;
 	}
-	if ((*t)->l->value > a)
+	if (l == NULL && r == NULL)
 	{
-		push(a,&(*t)->l);
+		l = new Node(a);
+		r = new Node(value);
+		if (l->value > r->value)
+		{
+			Bankomat* buff = r->value;
+			r->value = l->value;
+			l->value = buff;
+		}
+		value = r->value;
+		return;
+	}
+	if (l != NULL && l->value > a)
+	{
+		l->push(a);
 	}
 	else
 	{
-		push(a, &(*t)->r);
+		if (r == NULL) {
+			r = new Node(a);
+		}
+		else {
+			r->push(a);
+		}
+	}
+	if (r != NULL) {
+		value = r->value;
+	}
+	else {
+		value = l->value;
 	}
 }
 
-/*ФУНКЦИЯ ОТОБРАЖЕНИЯ ДЕРЕВА НА ЭКРАНЕ*/
-void print(Node* t, int u)
+void Node::remove(Bankomat* a)
 {
-	if (t == NULL) return;                  //Если дерево пустое, то отображать нечего, выходим
-	else
-	{
-		print(t->l, ++u);                   //С помощью рекурсивного посещаем левое поддерево
-		for (int i = 0; i < u; ++i) std::cout << "|";
-		std::cout << t->info << std::endl;            //показываем элемент
-		u--;
+	if (value == NULL) {
+		return;
 	}
-	print(t->r, ++u);                       //С помощью рекурсии посещаем правое поддерево
+	if (l == NULL && r == NULL) {
+		if (value == a) {
+			value = NULL;
+		}
+		return;
+	}
+	if (l != NULL && l->value > a)
+	{
+		l->remove(a);
+		if (l->value == NULL) {
+			l = NULL;
+			if (r != NULL) {
+				value = r->value;
+			}
+			else {
+				value = NULL;
+			}
+		}
+	}
+	else if (r != NULL)
+	{
+		r->remove(a);
+		if (r->value == NULL) {
+			r = NULL;
+			if (l != NULL) {
+				value = l->value;
+			}
+			else {
+				value = NULL;
+			}
+		}
+	}
 }
 
-int main()
-{
-	int n;                              //Количество элементов
-	Bankomat* s;                              //Объект,передаваемый в дерево
-	std::cout << "введите количество элементов  ";
-	std::cin >> n;                           //Вводим количество элементов
-
-	for (int i = 0; i < n; ++i)
-	{
-		std::cout << "введите объект  ";
-		std::cin >> *s;                       //Считываем элемент за элементом
-
-		push(s, &tree);                 //И каждый кладем в дерево
+Bankomat* Node::find(char* id) {
+	if (value == NULL) {
+		return NULL;
 	}
-	std::cout << "ваше дерево\n";
-	print(tree, 0);
-	std::cin.ignore().get();
+	if (*value == id) {
+		std::cout << value << std::endl;
+		return value;
+	}
+	if (l == NULL & r == NULL) {
+		return NULL;
+	}
+	if (l != NULL && *l->value > id) {
+		std::cout << l->find(id) << std::endl;
+		return l->find(id);
+	}
+	else if (r != NULL) {
+		std::cout << r->find(id) << std::endl;
+		return r->find(id);
+	}
+}
+
+void Node::print()
+{
+	if (value == NULL) return;
+	if (l == NULL && r == NULL)
+	{
+		std::cout << *value << std::endl;
+	}
+	if (l != NULL) {
+		l->print();
+	}
+	if (r != NULL) {
+		r->print();
+	}
 }
