@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 #include <fstream>
 #include <algorithm>
 #include <cassert>
@@ -11,14 +12,22 @@ using namespace std;
 
 void TestingPolymorphismQuality(Bi_tree Check2)
 {
-	char* namee = new char[20];
-
-	char* namee1 = new char[20];
+	const char* namee = "123asd";
+	const char* namee1 = "123asd";
+	const char* namee2 = "123asd";
+	char* nameeee = new char[20];
+	strcpy(nameeee, namee1);
+	char* name2 = new char[20];
+	char* namee23 = new char[20];
+	strcpy(name2, namee);
+	strcpy(namee23, namee2);
 	const char* m = " 123asd,15000,5000";
-	cin.getline(namee,20);
-	cin.getline(namee1, 20);
-	Bank_withHistory bla(namee1, 15000, 5000);
-	Bankomat address(namee,15000,5000);
+	Bankomat bla(nameeee, 15000, 5000);
+	Bank_withHistory address(name2,15000,5000);
+	Bank_name_address bear(namee23,15000,5000);
+	Check2.push(&bla);
+	Check2.push(&address);
+	Check2.push(&bear);
 	if ((address.toString() == m) && (Check2.toString() == m) && (bla.toString() == m ))
 	{
 		cout << " Polymorphism working properly " << endl;
