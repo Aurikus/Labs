@@ -3,21 +3,21 @@
 #include "Bank_transition+Bank_withHistory.h"
 #include "Node.h"
 
-
-Bi_tree::Bi_tree(Bankomat* f)
+template <class T> Bi_tree<T>::Bi_tree(T* f)
 {
 	value = f;
 	l, r = NULL;
 }
 
-Bi_tree::Bi_tree() {
+
+template <class T> Bi_tree<T>::Bi_tree()
+{
 	value = NULL;
 }
 
-Bi_tree* tree = NULL;
-
 /*тсмйжхъ гюохях назейрю б ахмюпмне депебн*/
-void Bi_tree::push(Bankomat* a)
+template <class T>
+void Bi_tree<T>::push(T* a)
 {
 	if (value == NULL) {
 		value = a;
@@ -29,7 +29,7 @@ void Bi_tree::push(Bankomat* a)
 		r = new Bi_tree(value);
 		if (l->value > r->value)
 		{
-			Bankomat* buff = r->value;
+			T* buff = r->value;
 			r->value = l->value;
 			l->value = buff;
 		}
@@ -57,7 +57,8 @@ void Bi_tree::push(Bankomat* a)
 	}
 }
 
-void Bi_tree::remove(Bankomat* a)
+template <class T>
+void Bi_tree<T>::remove(T* a)
 {
 	if (value == NULL) {
 		return;
@@ -96,19 +97,19 @@ void Bi_tree::remove(Bankomat* a)
 	}
 }
 
-Bankomat* Bi_tree::find(char* id) {
+template<class T> T* Bi_tree<T>::find(T* id) {
 	if (value == NULL) {
 		return NULL;
 	}
 	if (*value == id) {
-		std::cout << value << std::endl;
+		std::cout <<  value <<  std::endl;
 		return value;
 	}
 	if (l == NULL & r == NULL) {
 		return NULL;
 	}
 	if (l != NULL && *l->value > id) {
-		std::cout << l->find(id) << std::endl;
+		std::cout <<  l->find(id) <<  std::endl;
 		return l->find(id);
 	}
 	else if (r != NULL) {
@@ -116,13 +117,13 @@ Bankomat* Bi_tree::find(char* id) {
 		return r->find(id);
 	}
 }
-
-char* Bi_tree::toString()
+template <class T>
+char* Bi_tree<T>::toString()
 {
-	if (value == NULL) return;
+	if (value == NULL) return 0;
 	if (l == NULL && r == NULL)
 	{
-		std::cout << *value << std::endl;
+		std::cout << * value << std::endl;
 	}
 	if (l != NULL) {
 		l->toString();
